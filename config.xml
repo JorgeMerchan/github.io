@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.jmerchan.games.juego" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Juego</name>
+<widget id="com.jmerchan.games.pooprain" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>Juego PoopRain</name>
     <description>
         Juego para  Módulo 4 - Sensores, Desarrolla tu juego con Phaser.
     </description>
@@ -9,4 +9,12 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <platform name="android">
+        <icon src="ldpi.png" platform="android" qualifier="ldpi" />
+        <icon src="mdpi.png" platform="android" qualifier="mdpi" />
+        <icon src="hdpi.png" platform="android" qualifier="hdpi" />
+        <icon src="xhdpi.png" platform="android" qualifier="xhdpi" />
+        <icon src="xxhdpi.png" platform="android" qualifier="xxhdpi" />
+        <icon src="fr-xxhdpi.png" platform="android" qualifier="fr-xxhdpi" />
+    </platform>
 </widget>
