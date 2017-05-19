@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.jmerchan.games.juego" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>Juego</name>
+    <description>
+        Juego para  Módulo 4 - Sensores, Desarrolla tu juego con Phaser.
+    </description>
+    <author email="jeancmo@gmail.com.com" href="">
+        Jorge Merchan
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+</widget>
