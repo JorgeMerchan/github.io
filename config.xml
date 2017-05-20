@@ -9,11 +9,4 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
-    <platform name="android">        
-        <icon src="platforms/android/res/mipmap-mdpi/pooprain.png" platform="android" qualifier="mdpi" />
-        <icon src="platforms/android/res/mipmap-hdpi/pooprain.png" platform="android" qualifier="hdpi" />
-        <icon src="platforms/android/res/mipmap-xhdpi/pooprain.png" platform="android" qualifier="xhdpi" />
-        <icon src="platforms/android/res/mipmap-xxhdpi/pooprain.png" platform="android" qualifier="xxhdpi" />
-        <icon src="platforms/android/res/mipmap-xxxhdpi/pooprain.png" platform="android" qualifier="xxxhdpi" />
-    </platform>
 </widget>
