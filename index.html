@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="app">
+        {{ message }}
+        <table class="table-striped table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Queen</th>
+                    <th>Votes</th>
+                    <th>PCT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="queen in listItems">
+                    <td>{{ queen.id }}</td>
+                    <td>{{ queen.text }}</td>
+                    <td>{{ queen.count.total.toLocaleString() }}</td>
+                    <td>{{ queen.count.pct }}%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/marked@0.3.6"></script>
+    <script src="https://unpkg.com/lodash@4.16.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var dataURL = 'http://api.massrelevance.com/v1/polls.json?poll=4SE&option=S50';
+        var posts = $.getJSON(dataURL, function (data) {
+            return data;
+        });
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue!',
+                queens: [] // initialize empty array
+            },
+            mounted() { // when the Vue app is booted up, this is run automatically.
+                var self = this // create a closure to access component in the callback below
+                $.getJSON(dataURL, function (data) {
+                    self.queens = data.data.polls[0].options;
+                });
+            },
+            computed: {
+                listItems() {
+                    return _.orderBy(this.queens, 'count.total', 'desc');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
