@@ -79,7 +79,7 @@
             setTimeout(function () {
                 $.post(VOTING_URL, function (data) {
                     console.log(data.status);
-                    app.message = 'Count: ' + i + '=>' + data.status;
+                    app.message = 'Vote N° ' + i + ' => ' + data.status;
                 });
                 if (--i) { // If i > 0, keep going
                     theLoop(i); // Call the loop again, and pass it the current value of i
@@ -93,6 +93,7 @@
             });
         }
         setInterval(function () {
+            app.message = app.message + ' => refresh';
             loadData() // this will run after every 10 seconds
         }, 10000);
     </script>
