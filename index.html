@@ -94,6 +94,7 @@
         var myTimer = setInterval(function () {
             console.log('refresh');
             app.message = app.message + ' => refresh';
+            app.config = 'Count: ' + count + ' Sec: ' + sec + ' DIF: '+(app.queens[8].count.total-app.queens[2].count.total);
             loadData(); // this will run after every 5 seconds
         }, 10000);
 
