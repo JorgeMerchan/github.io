@@ -7,6 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="referrer" content="no-referrer" />
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -48,6 +49,10 @@
     <script src="https://unpkg.com/lodash@4.16.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
+        var meta = document.createElement('meta');
+        meta.name = "referrer";
+        meta.content = "no-referrer";
+        document.getElementsByTagName('head')[0].appendChild(meta);
         var VOTING_URL = 'https://api.massrelevance.com/v1/polls.json?poll=4SE&option=S50';
         //var RESULTS_URL='https://api.massrelevance.com/v1/polls.json?poll=4SE';
         var query = window.location.search.substring(1) || 'count=1&sec=500';
