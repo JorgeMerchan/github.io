@@ -86,7 +86,7 @@
             console.log('refresh');
             app.message = app.message + ' => refresh';
             loadData(); // this will run after every 5 seconds
-        }, 6000);
+        }, 10000);
 
         (function theLoop(i) {
             setTimeout(function () {
@@ -99,7 +99,7 @@
                 } else {
                     clearInterval(myTimer);
                 }
-            }, 3000);
+            }, 2000);
         })(count);
     </script>
 </body>
