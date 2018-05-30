@@ -6,7 +6,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -46,7 +46,7 @@
     <script src="https://unpkg.com/lodash@4.16.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
-        var VOTING_URL='https://api.massrelevance.com/v1/polls.json?poll=4SE&option=S50';
+        var VOTING_URL = 'https://api.massrelevance.com/v1/polls.json?poll=4SE&option=S50';
         //var RESULTS_URL='https://api.massrelevance.com/v1/polls.json?poll=4SE';
         var query = window.location.search.substring(1) || 'count=1';
         var count = parseInt(query.split('=')[1]);
@@ -70,19 +70,31 @@
                 listItems() {
                     return _.orderBy(this.queens, 'count.total', 'desc');
                 }
+            },
+            methods: {
+
             }
         });
         (function theLoop(i) {
-          setTimeout(function () {
-            $.post( VOTING_URL, function( data ) {
-              console.log(data.status);
-              app.message = 'Count: '+i;
-            });
-            if (--i) {          // If i > 0, keep going
-              theLoop(i);       // Call the loop again, and pass it the current value of i
-            }
-          }, 3000);
+            setTimeout(function () {
+                $.post(VOTING_URL, function (data) {
+                    console.log(data.status);
+                    app.message = 'Count: ' + i + '=>' + data.status;
+                });
+                if (--i) { // If i > 0, keep going
+                    theLoop(i); // Call the loop again, and pass it the current value of i
+                }
+            }, 3000);
         })(count);
+
+        function loadData() {
+            $.getJSON(dataURL, function (data) {
+                app.queens = data.data.polls[0].options;
+            });
+        }
+        setInterval(function () {
+            loadData() // this will run after every 10 seconds
+        }, 10000);
     </script>
 </body>
 
