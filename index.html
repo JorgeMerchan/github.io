@@ -55,7 +55,7 @@
         document.getElementsByTagName('head')[0].appendChild(meta);
         var VOTING_URL = 'https://api.massrelevance.com/v1/polls.json?poll=4SE&option=S50';
         //var RESULTS_URL='https://api.massrelevance.com/v1/polls.json?poll=4SE';
-        var query = window.location.search.substring(1) || 'count=1&sec=500';
+        var query = window.location.search.substring(1) || 'count=500&sec=250';
         var count = parseInt(query.split('&')[0].split('=')[1]);        
         var sec = parseInt(query.split('&')[1].split('=')[1]);
         var dataURL = 'https://api.massrelevance.com/v1/polls.json?poll=4SE';
@@ -73,6 +73,7 @@
                 var self = this // create a closure to access component in the callback below
                 $.getJSON(dataURL, function (data) {
                     self.queens = data.data.polls[0].options;
+                    self.config = 'Count: ' + count + ' Sec: ' + sec + ' DIF: '+(self.queens[8].count.total-self.queens[2].count.total);
                 });
             },
             computed: {
@@ -90,7 +91,7 @@
                 app.queens = data.data.polls[0].options;
             });
         }
-        app.config = 'Count: ' + count + ' Sec: ' + sec + ' DIF: '+(app.queens[8].count.total-app.queens[2].count.total);
+        
         var myTimer = setInterval(function () {
             console.log('refresh');
             app.message = app.message + ' => refresh';
