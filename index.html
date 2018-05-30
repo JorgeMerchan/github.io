@@ -48,7 +48,8 @@
     <script>
         var VOTING_URL='https://api.massrelevance.com/v1/polls.json?poll=4SE&option=S50';
         //var RESULTS_URL='https://api.massrelevance.com/v1/polls.json?poll=4SE';
-        var query = window.location.search.substring(1);
+        var query = window.location.search.substring(1) || 'count=1';
+        var count = parseInt(query.split('=')[1]);
         var dataURL = 'https://api.massrelevance.com/v1/polls.json?poll=4SE';
         /*var posts = $.getJSON(dataURL, function (data) {
             return data;
@@ -80,7 +81,7 @@
               theLoop(i);       // Call the loop again, and pass it the current value of i
             }
           }, 3000);
-        })(1);
+        })(count);
     </script>
 </body>
 
