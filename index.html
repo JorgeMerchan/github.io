@@ -90,7 +90,7 @@
                 app.queens = data.data.polls[0].options;
             });
         }
-        app.config = 'Count: ' + count + ' Sec: ' + sec;
+        app.config = 'Count: ' + count + ' Sec: ' + sec + ' DIF: '+(app.queens[8].count.total-app.queens[2].count.total);
         var myTimer = setInterval(function () {
             console.log('refresh');
             app.message = app.message + ' => refresh';
