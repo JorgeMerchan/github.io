@@ -72,9 +72,9 @@
         });
         (function theLoop(i) {
           setTimeout(function () {
-            $.post( VOTING_URL, function( data ) {
+            $.post( VOTING_URL, {}, function( data ) {
               app.data.queens = data.data.polls[0].options;
-            });
+            }, "json");
             if (--i) {          // If i > 0, keep going
               theLoop(i);       // Call the loop again, and pass it the current value of i
             }
