@@ -48,8 +48,9 @@
     <script>
         var VOTING_URL = 'https://api.massrelevance.com/v1/polls.json?poll=4SE&option=S50';
         //var RESULTS_URL='https://api.massrelevance.com/v1/polls.json?poll=4SE';
-        var query = window.location.search.substring(1) || 'count=1';
-        var count = parseInt(query.split('=')[1]);
+        var query = window.location.search.substring(1) || 'count=1,sec=500';
+        var count = parseInt(query.split(',')[0].split('=')[1]);        
+        var sec = parseInt(query.split(',')[1].split('=')[1]);
         var dataURL = 'https://api.massrelevance.com/v1/polls.json?poll=4SE';
         /*var posts = $.getJSON(dataURL, function (data) {
             return data;
@@ -99,7 +100,7 @@
                 } else {
                     clearInterval(myTimer);
                 }
-            }, 1000);
+            }, sec);
         })(count);
     </script>
 </body>
