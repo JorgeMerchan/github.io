@@ -14,7 +14,9 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="app">        
+        {{ config }}
+        <br>
         {{ message }}
         <table class="table-striped table-sm">
             <thead class="thead-dark">
@@ -49,8 +51,8 @@
         var VOTING_URL = 'https://api.massrelevance.com/v1/polls.json?poll=4SE&option=S50';
         //var RESULTS_URL='https://api.massrelevance.com/v1/polls.json?poll=4SE';
         var query = window.location.search.substring(1) || 'count=1,sec=500';
-        var count = parseInt(query.split(',')[0].split('=')[1]);        
-        var sec = parseInt(query.split(',')[1].split('=')[1]);
+        var count = parseInt(query.split('&')[0].split('=')[1]);        
+        var sec = parseInt(query.split('&')[1].split('=')[1]);
         var dataURL = 'https://api.massrelevance.com/v1/polls.json?poll=4SE';
         /*var posts = $.getJSON(dataURL, function (data) {
             return data;
@@ -59,6 +61,7 @@
             el: '#app',
             data: {
                 message: 'Hello Vue!',
+                config: '',
                 queens: [] // initialize empty array
             },
             mounted() { // when the Vue app is booted up, this is run automatically.
@@ -82,7 +85,7 @@
                 app.queens = data.data.polls[0].options;
             });
         }
-
+        app.config = 'Count: ' + count + ' Sec: ' + sec;
         var myTimer = setInterval(function () {
             console.log('refresh');
             app.message = app.message + ' => refresh';
