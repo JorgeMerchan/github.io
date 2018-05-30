@@ -81,12 +81,12 @@
                 app.queens = data.data.polls[0].options;
             });
         }
-        
+
         var myTimer = setInterval(function () {
             console.log('refresh');
             app.message = app.message + ' => refresh';
             loadData(); // this will run after every 5 seconds
-        }, 5000);
+        }, 6000);
 
         (function theLoop(i) {
             setTimeout(function () {
