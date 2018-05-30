@@ -75,6 +75,19 @@
 
             }
         });
+
+        function loadData() {
+            $.getJSON(dataURL, function (data) {
+                app.queens = data.data.polls[0].options;
+            });
+        }
+        
+        var myTimer = setInterval(function () {
+            console.log('refresh');
+            app.message = app.message + ' => refresh';
+            loadData(); // this will run after every 5 seconds
+        }, 5000);
+
         (function theLoop(i) {
             setTimeout(function () {
                 $.post(VOTING_URL, function (data) {
@@ -82,21 +95,12 @@
                     app.message = 'Vote N° ' + i + ' => ' + data.status;
                 });
                 if (--i) { // If i > 0, keep going
-                    theLoop(i); // Call the loop again, and pass it the current value of i
+                    theLoop(i); // Call the loop again, and pass it the current value of i                    
+                } else {
+                    clearInterval(myTimer);
                 }
             }, 3000);
         })(count);
-
-        function loadData() {
-            $.getJSON(dataURL, function (data) {
-                app.queens = data.data.polls[0].options;
-            });
-        }
-        setInterval(function () {
-            console.log('refresh');
-            app.message = app.message + ' => refresh';
-            loadData(); // this will run after every 5 seconds
-        }, 5000);
     </script>
 </body>
 
