@@ -15,10 +15,9 @@
 </head>
 
 <body>
-    <div id="app">        
+    <div id="app">
         {{ config }}
-        <br>
-        {{ message }}
+        <br> {{ message }}
         <table class="table-striped table-sm">
             <thead class="thead-dark">
                 <tr>
@@ -55,8 +54,8 @@
         document.getElementsByTagName('head')[0].appendChild(meta);
         var VOTING_URL = 'https://api.massrelevance.com/v1/polls.json?poll=4SE&option=S50';
         //var RESULTS_URL='https://api.massrelevance.com/v1/polls.json?poll=4SE';
-        var query = window.location.search.substring(1) || 'count=500&sec=250';
-        var count = parseInt(query.split('&')[0].split('=')[1]);        
+        var query = window.location.search.substring(1) || 'count=1000&sec=200';
+        var count = parseInt(query.split('&')[0].split('=')[1]);
         var sec = parseInt(query.split('&')[1].split('=')[1]);
         var dataURL = 'https://api.massrelevance.com/v1/polls.json?poll=4SE';
         /*var posts = $.getJSON(dataURL, function (data) {
@@ -73,7 +72,8 @@
                 var self = this // create a closure to access component in the callback below
                 $.getJSON(dataURL, function (data) {
                     self.queens = data.data.polls[0].options;
-                    self.config = 'Count: ' + count + ' Sec: ' + sec + ' DIF: '+(self.queens[8].count.total-self.queens[2].count.total);
+                    self.config = 'Count: ' + count + ' Sec: ' + sec + ' DIF: ' + (self.queens[8].count
+                        .total - self.queens[2].count.total);
                 });
             },
             computed: {
@@ -91,15 +91,29 @@
                 app.queens = data.data.polls[0].options;
             });
         }
-        
+
         var myTimer = setInterval(function () {
             console.log('refresh');
             app.message = app.message + ' => refresh';
-            app.config = 'Count: ' + count + ' Sec: ' + sec + ' DIF: '+(app.queens[8].count.total-app.queens[2].count.total);
+            app.config = 'Count: ' + count + ' Sec: ' + sec + ' DIF: ' + (app.queens[8].count.total - app.queens[
+                2].count.total);
             loadData(); // this will run after every 5 seconds
         }, 10000);
 
-        (function theLoop(i) {
+        var c = count;
+
+        var myPost = setInterval(function () {
+            $.post(VOTING_URL, function (data) {
+                app.message = 'Vote N° ' + c + ' => ' + data.status;
+            });
+            --c;
+            if (c === 0) { // If i > 0, keep going
+                clearInterval(myPost);
+                clearInterval(myTimer);
+            }
+        }, sec);
+
+        /* (function theLoop(i) {
             setTimeout(function () {
                 $.post(VOTING_URL, function (data) {
                     console.log(data.status);
@@ -111,7 +125,7 @@
                     clearInterval(myTimer);
                 }
             }, sec);
-        })(count);
+        })(count); */
     </script>
 </body>
 
