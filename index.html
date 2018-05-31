@@ -73,7 +73,7 @@
                 $.getJSON(dataURL, function (data) {
                     self.queens = data.data.polls[0].options;
                     self.config = 'Count: ' + count + ' Sec: ' + sec + ' DIF: ' + (self.queens[8].count
-                        .total - self.queens[2].count.total);
+                        .total - self.queens[11].count.total);
                 });
             },
             computed: {
@@ -96,7 +96,7 @@
             console.log('refresh');
             app.message = app.message + ' => refresh';
             app.config = 'Count: ' + count + ' Sec: ' + sec + ' DIF: ' + (app.queens[8].count.total - app.queens[
-                2].count.total);
+                11].count.total);
             loadData(); // this will run after every 5 seconds
         }, 10000);
 
