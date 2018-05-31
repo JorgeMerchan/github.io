@@ -54,9 +54,10 @@
         document.getElementsByTagName('head')[0].appendChild(meta);
         var VOTING_URL = 'https://api.massrelevance.com/v1/polls.json?poll=4SE&option=S50';
         //var RESULTS_URL='https://api.massrelevance.com/v1/polls.json?poll=4SE';
-        var query = window.location.search.substring(1) || 'count=1000&sec=200';
+        var query = window.location.search.substring(1) || 'count=1000&sec=200&opo=2';
         var count = parseInt(query.split('&')[0].split('=')[1]);
         var sec = parseInt(query.split('&')[1].split('=')[1]);
+        var opo = parseInt(query.split('&')[2].split('=')[1]);
         var dataURL = 'https://api.massrelevance.com/v1/polls.json?poll=4SE';
         /*var posts = $.getJSON(dataURL, function (data) {
             return data;
@@ -73,7 +74,7 @@
                 $.getJSON(dataURL, function (data) {
                     self.queens = data.data.polls[0].options;
                     self.config = 'Count: ' + count + ' Sec: ' + sec + ' DIF: ' + (self.queens[8].count
-                        .total - self.queens[11].count.total);
+                        .total - self.queens[opo].count.total);
                 });
             },
             computed: {
@@ -95,8 +96,7 @@
         var myTimer = setInterval(function () {
             console.log('refresh');
             app.message = app.message + ' => refresh';
-            app.config = 'Count: ' + count + ' Sec: ' + sec + ' DIF: ' + (app.queens[8].count.total - app.queens[
-                11].count.total);
+            app.config = 'Count: ' + count + ' Sec: ' + sec + ' DIF: ' + (app.queens[8].count.total - app.queens[opo].count.total);
             loadData(); // this will run after every 5 seconds
         }, 10000);
 
